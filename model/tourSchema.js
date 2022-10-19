@@ -17,13 +17,7 @@ const tourSchema = mongoose.Schema(
     image: {
       type: String,
       required: [true, "Tour place image must be required"],
-      validator: (value) =>
-        validator.isURL(value, {
-          protocols: ["http", "https", "ftp"],
-          require_tld: true,
-          require_protocol: true,
-        }),
-      message: "Must be a Valid URL",
+      unique: true,
     },
     price: {
       type: Number,
