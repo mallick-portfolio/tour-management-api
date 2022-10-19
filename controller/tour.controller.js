@@ -95,3 +95,44 @@ module.exports.updateByIdTour = async (req, res, next) => {
     next(error);
   }
 };
+
+// Trending tour
+module.exports.getToursByMostView = async (req, res, next) => {
+  try {
+    const tours = await tourService.getToursByMostViewService();
+    if (tours) {
+      res.status(200).json({
+        status: "success",
+        message: "Get top 3 tour",
+        data: tours,
+      });
+    } else {
+      res.status(200).json({
+        status: "fail",
+        message: "Failed to get tours",
+      });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+// Chipest tour
+module.exports.getToursByChipestView = async (req, res, next) => {
+  try {
+    const tours = await tourService.getToursByChipestViewService();
+    if (tours) {
+      res.status(200).json({
+        status: "success",
+        message: "Get top 3 tour",
+        data: tours,
+      });
+    } else {
+      res.status(200).json({
+        status: "fail",
+        message: "Failed to get tours",
+      });
+    }
+  } catch (error) {
+    next(error);
+  }
+};

@@ -31,3 +31,14 @@ module.exports.updateTourByIdService = async (id, data) => {
   });
   return result;
 };
+
+// trending  tour service 
+module.exports.getToursByMostViewService = async () => {
+  const result = await Tour.find({}).sort("-view").limit(3);
+  return result;
+};
+// trending chipest tour service 
+module.exports.getToursByChipestViewService = async () => {
+  const result = await Tour.find({}).sort("view").limit(3);
+  return result;
+};
