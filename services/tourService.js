@@ -1,9 +1,15 @@
 const Tour = require("../model/tourSchema.js");
 
 // Get all tour service
-module.exports.getToursService = async () => {
-  const result = await Tour.find({});
-  return result;
+module.exports.getToursService = async (queries) => {
+  const result = await Tour.find({})
+    .skip(queries.skip)
+    .limit(queries.limit)
+    .select(queries.fields)
+    .sort(queries.sort);
+  const totalTour = await Tour.countDocuments({});
+  const totalPage = Math.ceil(totalTour / queries.limit);
+  return { totalTour, totalPage, result };
 };
 // Get tour by id service
 module.exports.getTourByIdService = async (id) => {

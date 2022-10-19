@@ -4,7 +4,30 @@ const tourService = require("../services/tourService.js");
 // Gell all tours
 module.exports.getTours = async (req, res, next) => {
   try {
-    const tours = await tourService.getToursService();
+    const queries = {};
+    if (req.query.fields) {
+      const fields = req.query.fields.split(",").join(" ");
+      queries.fields = fields;
+    }
+    if (req.query.sort) {
+      const sort = req.query.sort.split(",").join(" ");
+      queries.sort = sort;
+    }
+    if (req.query.limit) {
+      const limit = req.query.limit.split(",").join(" ");
+      queries.limit = limit;
+    }
+    if (req.query.sort) {
+      const sort = req.query.sort.split(",").join(" ");
+      queries.sort = sort;
+    }
+    if (req.query.page) {
+      const { page = 1, limit = 1 } = req.query;
+      const skip = (page - 1) * parseInt(limit);
+      queries.skip = skip;
+    }
+
+    const tours = await tourService.getToursService(queries);
     if (tours) {
       res.status(200).json({
         status: "success",
