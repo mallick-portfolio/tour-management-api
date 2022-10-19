@@ -1,10 +1,11 @@
 name
 image
 price
-view
-details
+description
 location
 reviews
+status
+view
 
 
 
@@ -19,9 +20,13 @@ Example: /tours?fields=name,image
 Must be paginated.
 (BONUS) The client can send a field (e.g. price) as query to sort the data with it.
 Example: /tours?sort=price
-POST /tours
-Add a tour
-Must have a schema and the body should be validated through it.
+
+
+POST /tours----------------------------
+Add a tour-----------------------------
+Must have a schema and the body should be validated through it.-----------
+
+
 GET /tours/:id
 Get a tour details by id
 Send all the information of the tour
